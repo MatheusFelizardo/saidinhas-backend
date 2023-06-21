@@ -5,7 +5,10 @@ On this project I used laravel and mysql to practice concepts like routes, api, 
 
 Still in development:
 
-<strong>Next backend step</strong>: add login (It's already configurated but I will need to make some database updates)
+<strong>Next backend step</strong>: 
+
+- ~~add login (It's already configurated but I will need to make some database updates)~~ Done 21/06 
+- make a connection between expense and user in the database
 
 ## Requirements
 - php (tested in the version 8.2)
