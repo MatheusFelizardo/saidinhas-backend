@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Expense;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ExpenseController extends Controller
@@ -10,9 +11,13 @@ class ExpenseController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $expense = Expense::all();
+        $user_id = $request->input('user_id');
+        $user = User::find($user_id);
+        // $expense = Expense::all();
+        // get expense for the user
+        $expense = $user->expenses;
 
         if ($expense->isEmpty()) {
             return response()->json([
@@ -28,18 +33,21 @@ class ExpenseController extends Controller
      */
     public function store(Request $request)
     {   
+        
         //
         $title = $request->input('title');
         $description = $request->input('description');
         $amount = $request->input('amount');
         $currency = $request->input('currency');
+        $user_id = $request->input('user_id');
 
         try {
             $expense = Expense::create([
                 'title' => $title,
                 'description' => $description,
                 'amount' => $amount,
-                'currency' => $currency
+                'currency' => $currency,
+                'user_id' => $user_id
             ]); 
 
             return response()->json([
@@ -78,7 +86,6 @@ class ExpenseController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
         $title = $request->input('title');
         $description = $request->input('description');
         $amount = $request->input('amount');

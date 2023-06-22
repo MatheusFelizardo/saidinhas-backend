@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->decimal('amount', 12, 2);
             $table->enum('currency', ['USD', 'EUR', 'BRL', 'GBP']);
+            $table->foreignId('user_id')->constrained('users');
         });
     }
 
