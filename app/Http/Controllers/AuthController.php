@@ -23,8 +23,14 @@ class AuthController extends Controller
             return response()->json($e->errors(), 422);
         }
 
-        $validatedData['password'] = Hash::make($validatedData['password']);
+        if ($request->hasFile('profile_picture')) {
+            $image = $request->file('profile_picture');
+            $path = $image->store('', 'profile_pictures');
+            $validatedData['profile_picture'] = "profile_pictures/" . $path;
+        }
 
+        $validatedData['password'] = Hash::make($validatedData['password']);
+        
         try {
             $user = User::create($validatedData);
             $token = $user->createToken('auth_token')->plainTextToken;
@@ -36,7 +42,7 @@ class AuthController extends Controller
 
         } catch (\Throwable $th) {
             return response()->json([
-                'message' => 'User creation failed'
+                'message' => 'User creation failed' . $th->getMessage()
             ], 500);
         }
       
