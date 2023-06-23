@@ -7,8 +7,13 @@ Still in development:
 
 <strong>Next backend step</strong>: 
 
-- ~~add login (It's already configurated but I will need to make some database updates)~~ Done 21/06 
-- make a connection between expense and user in the database
+- ~~feature: login (It's already configurated but I will need to make some database updates)~~ Done 21/06 
+- ~~feature: connection between expense and user in the database~~ Done 22/06 
+- ~~feature: profile picture for the users~~ Done 23/06 
+- feature: category for expenses
+- feature: filters (by category, low to high and high to low)
+- feature: return data to create the chart comparing the expenses in the last 3 months
+- feature: selected currency to the user
 
 ## Requirements
 - php (tested in the version 8.2)
