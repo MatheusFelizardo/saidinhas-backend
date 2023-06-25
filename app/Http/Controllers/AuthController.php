@@ -48,6 +48,52 @@ class AuthController extends Controller
       
     }
 
+    public function update(Request $request) {
+        $user = User::findOrFail($request->id);
+
+        $name = $request->name;
+        $new_password = $request->password;
+
+        try {
+            $validatedData = $request->validate([
+                'name' => 'string|max:255',
+                'password' => 'string|min:6',
+            ]);
+        } catch (ValidationException $e) {
+            return response()->json($e->errors(), 422);
+        }
+
+        if ($request->hasFile('profile_picture')) {
+            $image = $request->file('profile_picture');
+            $path = $image->store('', 'profile_pictures');
+            $validatedData['profile_picture'] = "profile_pictures/" . $path;
+        }
+
+        $credentials = [
+            'email' => $user->email,
+            'password' => $request->old_password
+        ];
+
+        if ($new_password && !Auth::attempt($credentials)) {
+            return response()->json([
+            'message' => 'Invalid password'
+            ], 401);
+        }
+
+        try {
+            $user->update($validatedData);
+
+            return response()->json([
+                'user' => $user
+            ], 200);
+
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'User update failed' . $th->getMessage()
+            ], 500);
+        }
+    }
+
     public function login(Request $request) {
         $credentials = $request->only('email', 'password');
 

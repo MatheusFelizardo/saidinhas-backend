@@ -7,9 +7,10 @@ Still in development:
 
 <strong>Next backend step</strong>: 
 
-- ~~feature: login (It's already configurated but I will need to make some database updates)~~ Done 21/06 
-- ~~feature: connection between expense and user in the database~~ Done 22/06 
-- ~~feature: profile picture for the users~~ Done 23/06 
+- ~~feature: login (It's already configurated but I will need to make some database updates)~~ Done 21/06/23
+- ~~feature: connection between expense and user in the database~~ Done 22/06/23 
+- ~~feature: profile picture for the users~~ Done 23/06/23 
+- ~~feature: create route to update user infos~~ Done 25/06/23
 - feature: category for expenses
 - feature: filters (by category, low to high and high to low)
 - feature: return data to create the chart comparing the expenses in the last 3 months

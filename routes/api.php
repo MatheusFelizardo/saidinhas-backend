@@ -23,6 +23,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 // Use the Expense routes in the API without sanctum authentication
 Route::apiResource('expenses', ExpenseController::class);
 Route::post('/register', [AuthController::class, 'register']);
+Route::post('/update', [AuthController::class, 'update']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::post('/user', [AuthController::class, 'user'])->middleware('auth:sanctum');
