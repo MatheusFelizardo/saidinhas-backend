@@ -50,10 +50,10 @@ class AuthController extends Controller
 
     public function update(Request $request) {
         $user = User::findOrFail($request->id);
-
+        
         $name = $request->name;
         $new_password = $request->password;
-
+       
         try {
             $validatedData = $request->validate([
                 'name' => 'string|max:255',
@@ -135,8 +135,30 @@ class AuthController extends Controller
         }
     }
 
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->json(['errors' => $validator->errors()], 422));
+    public function delete(string $id) {
+        try {
+            $user = User::find($id);
+
+            if (!$user) {
+                return response()->json([
+                    'error' => 'User not found'
+                ], 404);
+            }
+           
+            if ($user->expenses()->exists()) {
+                $user->expenses()->delete();
+            }
+            $user->delete();
+            return response()->json([
+                'message' => 'User deleted sucessfuly',
+                'user' => $user
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Expense deletion failed',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+
     }
 }

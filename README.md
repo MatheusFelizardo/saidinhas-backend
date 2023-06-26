@@ -15,6 +15,7 @@ Still in development:
 - feature: filters (by category, low to high and high to low)
 - feature: return data to create the chart comparing the expenses in the last 3 months
 - feature: selected currency to the user
+- bug: route update user is not working after change method to put or path
 
 ## Requirements
 - php (tested in the version 8.2)
@@ -29,10 +30,10 @@ Still in development:
 
 ## Routes
   The base url in Laravel usually is localhost:8000
-  - GET ${baseUrl}/api/expenses: get all expenses
-  - GET ${baseUrl}/api/expenses/{id}: get the expense info to the {id}
-  - DELETE ${baseUrl}/api/expenses/{id}: delete the expense {id}
-  - POST ${baseUrl}/api/expenses: create a new expense.
+  - GET {{ _.base_url }}/api/expenses: get all expenses
+  - GET {{ _.base_url }}/api/expenses/{id}: get the expense info to the {id}
+  - DELETE {{ _.base_url }}/api/expenses/{id}: delete the expense {id}
+  - POST {{ _.base_url }}/api/expenses: create a new expense.
     - format: 
     ```JSON 
     {
@@ -42,13 +43,35 @@ Still in development:
       "currency":"EUR"
     } 
     ```
-  - PUT ${baseUrl}/api/expenses/{id}: edit the expense {id}, same format to create but you can send just what you want to edit
+  - PUT {{ _.base_url }}/api/expenses/{id}: edit the expense {id}, same format to create but you can send just what you want to edit
     - example:
     ```JSON 
     {
       "title":"coke"
     } 
     ```
+  - POST {{ _.base_url }}/api/register: create a new user. You can send another parameter "profile_picture" as a file but need to send as form data.
+    - format: 
+      ```JSON 
+      {
+        "name":"Matheus Felizardo",
+        "email":"matheus.felizardo@gmail.com",
+        "password":"123456",
+      } 
+      ```
+  - POST {{ _.base_url }}/api/update: Update the user data. Need to send the id in the request, parameter 'id'
+  - DELETE {{ _.base_url }}/api/user/delete/{id}: Delete the user {id}
+  - POST {{ _.base_url }}/api/login: Login the user to save the token.
+     - format: 
+      ```JSON 
+        {
+          "email":"matheus.felizardo@gmail.com",
+          "password":"123456"
+        }
+      ```
+  - POST {{ _.base_url }}/api/logout: Disconnect the logged user. Necessary to send the bearer token.
+  - POST {{ _.base_url }}/api/user: Get information of the logged user. Necessary to send the bearer token.
+  
 
 <br/>
 <p>Check the <a href="https://github.com/MatheusFelizardo/saidinhas">Front-end repo</a></p>
