@@ -19,3 +19,4 @@ yarn-error.log
 /.vscode
 /public/profile_pictures
 /public/profile_pictures/*
+*.zip

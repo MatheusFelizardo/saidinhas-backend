@@ -3,20 +3,6 @@ Project created to study backend and frontend in integration with <a href="https
 
 On this project I used laravel and mysql to practice concepts like routes, api, deployment and database.
 
-Still in development:
-
-<strong>Next backend step</strong>: 
-
-- ~~feature: login (It's already configurated but I will need to make some database updates)~~ Done 21/06/23
-- ~~feature: connection between expense and user in the database~~ Done 22/06/23 
-- ~~feature: profile picture for the users~~ Done 23/06/23 
-- ~~feature: create route to update user infos~~ Done 25/06/23
-- feature: category for expenses
-- feature: filters (by category, low to high and high to low)
-- feature: return data to create the chart comparing the expenses in the last 3 months
-- feature: selected currency to the user
-- bug: route update user is not working after change method to put or path
-
 ## Requirements
 - php (tested in the version 8.2)
 - composer (tested in version 2.2.9)
@@ -72,6 +58,18 @@ Still in development:
   - POST {{ _.base_url }}/api/logout: Disconnect the logged user. Necessary to send the bearer token.
   - POST {{ _.base_url }}/api/user: Get information of the logged user. Necessary to send the bearer token.
   
+## Updates
+
+- ~~feature: login (It's already configurated but I will need to make some database updates)~~ Done 21/06/23
+- ~~feature: connection between expense and user in the database~~ Done 22/06/23 
+- ~~feature: profile picture for the users~~ Done 23/06/23 
+- ~~feature: create route to update user infos~~ Done 25/06/23
+- ~~feature: create route to delete the user and associated expenses~~ Done 26/06/23
+- feature: category for expenses
+- feature: filters (by category, low to high and high to low)
+- feature: return data to create the chart comparing the expenses in the last 3 months
+- feature: selected currency to the user
+- bug: route update user is not working after change method to put or path
 
 <br/>
 <p>Check the <a href="https://github.com/MatheusFelizardo/saidinhas">Front-end repo</a></p>
