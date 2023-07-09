@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\FakeExchangeRateController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,3 +29,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanc
 Route::post('/user', [AuthController::class, 'user'])->middleware('auth:sanctum');
 Route::post('/update', [AuthController::class, 'update']); // update this route to path
 Route::delete('/user/delete/{id}', [AuthController::class, 'delete']);
+
+// fake api
+Route::apiResource('currency_rates', FakeExchangeRateController::class);

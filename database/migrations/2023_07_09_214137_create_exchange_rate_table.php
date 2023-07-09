@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('expenses', function (Blueprint $table) {
+        Schema::create('fake_exchange_rates', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('title');
-            $table->string('description')->nullable();
-            $table->decimal('amount', 12, 2);
-            $table->enum('currency', ['USD', 'EUR', 'BRL', 'GBP'])->default('EUR');
-            $table->foreignId('user_id')->constrained('users');
+            $table->date('date');
+            $table->decimal('rate_eur', 12, 2)->default(1);
+            $table->decimal('rate_brl', 12, 2);
+            $table->decimal('rate_usd', 12, 2);
+            $table->decimal('rate_gbp', 12, 2);
+
+            $table->index('date');
         });
     }
 
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('expenses');
+        Schema::dropIfExists('exchange_rate');
     }
 };

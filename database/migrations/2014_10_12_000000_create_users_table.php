@@ -18,6 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('profile_picture')->nullable();
+            $table->enum('currency', ['USD', 'EUR', 'BRL', 'GBP'])->default('EUR');
             $table->rememberToken();
             $table->timestamps();
         });

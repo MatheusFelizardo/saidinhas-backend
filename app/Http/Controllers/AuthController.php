@@ -53,11 +53,11 @@ class AuthController extends Controller
         
         $name = $request->name;
         $new_password = $request->password;
-       
         try {
             $validatedData = $request->validate([
                 'name' => 'string|max:255',
                 'password' => 'string|min:6',
+                'currency' => 'string|max:3'
             ]);
         } catch (ValidationException $e) {
             return response()->json($e->errors(), 422);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Expense;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Services\CurrencyConverterService;
 
 class ExpenseController extends Controller
 {
@@ -13,11 +14,15 @@ class ExpenseController extends Controller
      */
     public function index(Request $request)
     {
+        $converter = new CurrencyConverterService();
         $user_id = $request->input('user_id');
         $user = User::find($user_id);
         // $expense = Expense::all();
         // get expense for the user
         $expense = $user->expenses;
+
+        $parsedExpenses = $converter->convert($expense, $user->currency);
+        return response()->json($parsedExpenses);
 
         if ($expense->isEmpty()) {
             return response()->json([
@@ -94,7 +99,7 @@ class ExpenseController extends Controller
         $oldExpense = Expense::find($id);
         $newExpense = [
             'title' => $title ? $title : $oldExpense->title,
-            'description' => $description ? $description :  $oldExpense->description,
+            'description' => $description ? $description :  '',
             'amount' => $amount ? $amount : $oldExpense->amount,
             'currency' => $currency ? $currency : $oldExpense->currency,
         ];
