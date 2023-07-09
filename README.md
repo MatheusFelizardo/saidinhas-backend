@@ -68,9 +68,10 @@ On this project I used laravel and mysql to practice concepts like routes, api, 
 - feature: category for expenses
 - feature: filters (by category, low to high and high to low)
 - feature: return data to create the chart comparing the expenses in the last 3 months
-- feature: selected currency to the user
+- ~~feature: selected currency to the user~~ Done 09/07/2023
 - bug: route update user is not working after change method to put or path
-- ~~bug: laravel converting empty strings to null~~ Done 30/06
+- ~~bug: laravel converting empty strings to null~~ Done 30/06/2023
+- ~~feature: currency model to simulate a currency api~~ Done 09/07/2023
 
 ### Usefull commands
 - php artisan migrate:refresh && php artisan db:seed UsersTableSeeder && php artisan db:seed ExpensesTableSeeder: reset the database and seed the tables User and Expenses
