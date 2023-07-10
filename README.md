@@ -77,4 +77,4 @@ On this project I used laravel and mysql to practice concepts like routes, api, 
 - php artisan migrate:refresh && php artisan db:seed UsersTableSeeder && php artisan db:seed ExpensesTableSeeder: reset the database and seed the tables User and Expenses
 
 <br/>
-<p>Check the <a href="https://github.com/MatheusFelizardo/saidinhas">Front-end repo</a></p> 
+<p>Check the <a href="https://github.com/MatheusFelizardo/saidinhas">Front-end repo</a></p>
