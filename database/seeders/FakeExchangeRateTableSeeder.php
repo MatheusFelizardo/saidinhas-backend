@@ -23,15 +23,13 @@ class FakeExchangeRateTableSeeder extends Seeder
         while ($currentDate <= $endDate) {
             $exchangeRate = new FakeExchangeRate();
             $exchangeRate->date = $currentDate;
-            $exchangeRate->rate_eur = 1; // EUR base
+            $exchangeRate->rate_eur = 1;
 
-            // Generate rates based on EUR
             $exchangeRate->rate_brl = $faker->randomFloat(2, 5.18, 5.45);
             $exchangeRate->rate_usd = $faker->randomFloat(2, 1.07, 1.10);
             $exchangeRate->rate_gbp = $faker->randomFloat(2, 0.85, 0.90);
 
             $exchangeRate->save();
-
             $currentDate = date('Y-m-d', strtotime($currentDate . ' +1 day'));
         }
     }

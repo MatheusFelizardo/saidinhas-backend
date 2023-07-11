@@ -36,26 +36,29 @@ class ExpenseController extends Controller
      */
     public function store(Request $request)
     {   
-        
+        $converter = new CurrencyConverterService();
         //
         $title = $request->input('title');
         $description = $request->input('description');
         $amount = $request->input('amount');
-        $currency = $request->input('currency');
+        $currency = $request->input('currency'); // We use here to send the response after save
         $user_id = $request->input('user_id');
+        
 
         try {
             $expense = Expense::create([
                 'title' => $title,
                 'description' => $description,
-                'amount' => $amount,
-                'currency' => $currency,
+                'amount' => $converter->convert_amount_to_eur($amount, $currency),
+                'currency' => 'EUR',
                 'user_id' => $user_id
-            ]); 
+            ])->toArray(); 
+
+            $parsedExpense = $converter->format_currency_after_save($expense, $currency);
 
             return response()->json([
                 'message' => 'Expense created sucessfully',
-                'expense' => $expense,
+                'expense' => $parsedExpense,
             ], 201);
         }   catch (\Exception $e) {
             return response()->json([
@@ -64,7 +67,6 @@ class ExpenseController extends Controller
             ], 500);
         }
 
-        
     }
 
     /**
@@ -89,6 +91,8 @@ class ExpenseController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $converter = new CurrencyConverterService();
+
         $title = $request->input('title');
         $description = $request->input('description');
         $amount = $request->input('amount');
@@ -98,15 +102,19 @@ class ExpenseController extends Controller
         $newExpense = [
             'title' => $title ? $title : $oldExpense->title,
             'description' => $description ? $description :  '',
-            'amount' => $amount ? $amount : $oldExpense->amount,
-            'currency' => $currency ? $currency : $oldExpense->currency,
+            'amount' => $amount ? 
+                        $converter->convert_amount_to_eur($amount, $currency, $oldExpense->created_at ) : 
+                        $converter->convert_amount_to_eur($oldExpense->amount, $currency, $oldExpense->created_at),
+            'currency' => 'EUR',
         ];
 
         try {
             $oldExpense->update($newExpense);
+
+            $parsedExpense = $converter->format_currency_after_save($oldExpense->toArray(), $currency);
             return response()->json([
                 'message' => 'Expense updated successfully',
-                'expense' => $oldExpense,
+                'expense' => $parsedExpense,
             ]);
         } catch (\Exception $e) {
             return response()->json([
