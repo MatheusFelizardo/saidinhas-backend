@@ -21,16 +21,14 @@ class ExpenseController extends Controller
         // get expense for the user
         $expense = $user->expenses;
 
-        $parsedExpenses = $converter->convert($expense, $user->currency);
-        return response()->json($parsedExpenses);
-
         if ($expense->isEmpty()) {
             return response()->json([
                 'message' => 'No expenses found',
             ], 404);
         }
 
-        return response()->json($expense);
+        $parsedExpenses = $converter->convert($expense, $user->currency);
+        return response()->json($parsedExpenses);
     }
 
     /**
